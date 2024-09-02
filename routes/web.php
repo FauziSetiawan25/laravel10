@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,3 +17,23 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/home', function () {
+    return view('home');
+})->name('home');
+
+Route::get('/about', function () {
+    return view('about', [
+        "name" => "Ujang",
+        "email" => "ujanggaming@gmail.com"
+    ]);
+})->name('about');
+
+Route::get('/contact', function () {
+    return view('contact', [
+        "telp" => "0888888999999",
+        "email" => "ujanggaming@gmail.com"
+    ]);
+})->name('contact');
+
+Route::get('/posts', [PostController::class,'index']);
