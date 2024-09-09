@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BukuController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\LoginController;
 use Illuminate\Support\Facades\Route;
@@ -40,3 +41,5 @@ Route::get('/contact', function () {
 Route::get('/posts', [PostController::class,'index']);
 
 Route::get('/login', [LoginController::class,'index']);
+
+Route::get('/buku', [BukuController::class,'index']);
