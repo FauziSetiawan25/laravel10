@@ -16,24 +16,39 @@
 			<div class="card-body">
                 <table class="table table-bordered">
                     <tbody>
+                        <a href="{{ route('buku.create') }}" class="btn btn-primary float-end">Tambah Buku</a>
                         <tr>
-                            <td>Id</td>
+                            <td>No</td>
                             <td>Judul Buku</td>
                             <td>Penulis</td>
                             <td>Harga</td>
                             <td>Tanggal Terbit</td>
                             <td>Aksi</td>
                         </tr>
-                        @foreach ($data_buku as $buku)
+                        @foreach ($data_buku as $index => $buku)
                         <tr>
-                            <td>{{ $buku->id }}</td>
+                            <td>{{ $index+1 }}</td>
                             <td>{{ $buku->judul }}</td>
                             <td>{{ $buku->penulis }}</td>
                             <td>{{ "Rp. ".number_format($buku->harga, 2, '.', '.') }}</td>
                             <td>{{ \Carbon\Carbon::parse($buku->tgl_terbit)->format('d/m/Y') }}</td>
                             <td>
-                                <a class="btn btn-warning btn-sm" href="">Edit</a>
-					            <a class="btn btn-danger btn-sm" href="">Hapus</a>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <form action="{{ route('buku.edit', $buku -> id) }}" method="GET">
+                                            @csrf
+                                            <button type="submit" class="btn btn-warning btn-sm">Edit</button>
+                                        </form>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <form action="{{ route('buku.destroy', $buku -> id) }}" method="POST">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button onclick="return confirm('Yakin mau dihapus?')" 
+                                            type="submit" class="btn btn-danger btn-sm">Hapus</button>
+                                        </form>
+                                    </div>
+                                </div>
                             </td>
                         </tr>
                         @endforeach
