@@ -54,3 +54,7 @@ Route::delete('/buku/{id}', [BukuController::class, 'destroy']) -> name('buku.de
 Route::get('/buku/edit/{id}', [BukuController::class, 'edit']) -> name('buku.edit');
 
 Route::put('/buku/{id}', [BukuController::class, 'update']) -> name('buku.update');
+
+
+Route::get('/buku/search', [BukuController::class, 'search']) -> name('buku.search');
+

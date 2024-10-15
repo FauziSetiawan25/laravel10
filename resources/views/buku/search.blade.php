@@ -16,15 +16,10 @@
 <body>
     <div class="container">
         <h2>Data Buku</h2>
-         @if (Session::has('successadd'))
-            <div class="alert alert-success">{{ Session::get('successadd') }}</div>
-        @endif
-        @if (Session::has('successedit'))
-            <div class="alert alert-success">{{ Session::get('successedit') }}</div>
-        @endif
-        @if (Session::has('successdel'))
-            <div class="alert alert-success">{{ Session::get('successdel') }}</div>
-        @endif
+        @if (count($data_buku))
+            <div class="alert alert-success">
+                Ditemukan <strong>{{ count($data_buku) }}</strong> 
+                data dengan kata: <strong>{{ $cari }}</strong></div>
 		<div class="card">
 			<div class="card-body">
                <a href="{{ route('buku.create') }}" class="btn btn-primary float-end">Tambah Buku</a>
@@ -79,7 +74,11 @@
                 <div>{{ $data_buku ->links('pagination::bootstrap-5') }}</div>
                 
                 <p>Jumlah buku : {{ $count }} buku</p>
-                <p>Total harga buku : {{ "Rp. ".number_format($total, 2, '.', '.') }}</p>
+                @else
+                    <div class="alert alert-warning">
+                        <h4>Data {{ $cari }} tidak ditemukan</h4> 
+                        <a href="/buku">Kembali</a></div>
+                @endif
             </div>
         </div>
     </div>
